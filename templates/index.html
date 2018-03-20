@@ -3,19 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>My Pi Webserver</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script src="../static/index.js"></script>
+    <link href="../static/index.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/jquery-clockpicker.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Rammetto+One" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/jquery-clockpicker.js"></script>
 </head>
 <body>
     <div id="main_container">
         <div id="main_header_div">
             <h1 id="main_header">
-                My Pi TV-Alarm
+                My <img id="header_img" src="../static/RPi-Logo-Reg-SCREEN.png">-Pi TV-Alarm
             </h1>
         </div>
-        <form id="alarm_clock_form">
-            <input id="time" type="time" value="07:00" required>
+        <div id="clock_picker_input" class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+            <input id="clock-picker" type="text" class="form-control" value="07:00">
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-time"></span>
+            </span>
+        </div>
+        <script type="text/javascript">
+            $('#clock_picker_input').clockpicker({
+                autoclose:true,
+                'default':'07:00',
+                donetext: 'Done',
+                afterDone: function() {
+                    alert("after done");
+                }});
+        </script>
+        <form id="set_alarm_form">
             <input id="set_alarm_button" type="button" value="Set alarm">
+            <input id="clear_alarm_button" type="button" value="Clear alarm">
         </form>
+        <div>
+            <p id="server_response">SVAR FRÅN SERVERN</p>
+        </div>
     </div>
 </body>
 </html>

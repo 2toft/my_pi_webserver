@@ -1,0 +1,47 @@
+html{
+    background: url("alarm-clock.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#main_container{
+    text-align: center;
+    align-content: center;
+    display: block;
+    float: right;
+    padding-right: 10%;
+    padding-top: 15%;
+    color: #000;
+}
+
+#header_img{
+    height: 60px;
+    width: 55px;
+}
+
+#set_alarm_button{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#main_header{
+    color: #FFF;
+    font-family: 'Rammetto One', cursive;
+}
+
+#server_response{
+    /*display: none;*/
+    font-size: medium;
+    color: red;
+}
+
+#clock-picker{
+    width: 80px;
+}
+
+#clock_picker_input{
+    width: 100px;
+    margin: auto;
+}
