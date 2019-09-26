@@ -8,14 +8,16 @@ app = Flask(__name__)
 app.debug = True
 
 def check_alarm_times():
-    f = open("alarm_times.txt", "r")
-    if f.mode == "r":
+    with open("alarm_times.txt", "r") as f:
+    #if f.mode == "r":
         alarm_times = f.readlines()
         now = datetime.datetime.now()
         for time in alarm_times:
-            if time == now:
-                tv_alarm_script.run()
-    f.close()
+            print("time = " + str(time))
+            #if time == now:
+            #    tv_alarm_script.run()
+
+    #f.write("%s\n" % line.strip())
 
 
 @app.route('/')
@@ -33,19 +35,23 @@ timer = None
 
 @app.route('/alarm', methods=['POST'])
 def set_alarm():
-    f = open("alarm_times.txt", "w+")
-    alarm_request = request.get_json()['alarm_data']
-    alarm_request_hour = int(alarm_request[0:2])
-    alarm_request_minute = int(alarm_request[3:5])
-    now = datetime.datetime.now()
-    year = now.year
-    month = now.month
-    day = now.day
-    hour = now.hour
-    minute = now.minute
-    second = now.second
-    alarm_time = datetime.datetime(year, month, day, alarm_request_hour, alarm_request_minute, 0)
-    f.write(alarm_time)
+    print("ALARM BITCHES!!!")
+    #f = open("alarm_times.txt", "w+")
+    with open("C:\Users\\natof\git\my_pi_server\\alarm_times.txt", "w+") as f:
+        alarm_request = request.get_json()['alarm_data']
+        alarm_request_hour = int(alarm_request[0:2])
+        alarm_request_minute = int(alarm_request[3:5])
+        now = datetime.datetime.now()
+        year = now.year
+        month = now.month
+        day = now.day
+        hour = now.hour
+        minute = now.minute
+        second = now.second
+        alarm_time = str(datetime.datetime(year, month, day, alarm_request_hour, alarm_request_minute, 0))
+        f.write(alarm_time)
+
+    return "Done"
 
     #alarm_request_hour = int(alarm_request[0:2])
     #alarm_request_minute = int(alarm_request[3:5])
