@@ -1,10 +1,21 @@
 from flask import Flask, render_template, request, jsonify
 import ir_sender, time, tv_alarm_script, datetime
 from threading import Timer
+from threading import Thread
 
 
 app = Flask(__name__)
 app.debug = True
+
+def check_alarm_times():
+    f = open("alarm_times.txt", "r")
+    if f.mode == "r":
+        alarm_times = f.readlines()
+        now = datetime.datetime.now()
+        for time in alarm_times:
+            if time == now:
+                tv_alarm_script.run()
+    f.close()
 
 
 @app.route('/')
@@ -21,6 +32,25 @@ def remote_control():
 timer = None
 
 @app.route('/alarm', methods=['POST'])
+def set_alarm():
+    f = open("alarm_times.txt", "w+")
+    alarm_request = request.get_json()['alarm_data']
+    alarm_request_hour = int(alarm_request[0:2])
+    alarm_request_minute = int(alarm_request[3:5])
+    now = datetime.datetime.now()
+    year = now.year
+    month = now.month
+    day = now.day
+    hour = now.hour
+    minute = now.minute
+    second = now.second
+    alarm_time = datetime.datetime(year, month, day, alarm_request_hour, alarm_request_minute, 0)
+    f.write(alarm_time)
+
+    #alarm_request_hour = int(alarm_request[0:2])
+    #alarm_request_minute = int(alarm_request[3:5])
+
+
 def alarm():
     alarm_request = request.get_json()['alarm_data']
     if alarm_request != "clear alarm":
@@ -51,7 +81,6 @@ def alarm():
         resp.status_code = 200
         return resp
     else:
-        timer.cancel()
         response = {
             'status': "200",
             'message': "Alarm stopped",
