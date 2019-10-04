@@ -16,32 +16,90 @@
 </head>
 <body>
     <div id="main_container">
-        <div id="main_header_div">
-            <h1 id="main_header">
-                My <img id="header_img" src="../static/RPi-Logo-Reg-SCREEN.png">-Pi TV-Alarm
-            </h1>
-        </div>
-        <div id="clock_picker_input" class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
-            <input id="clock-picker" type="text" class="form-control" value="07:00">
-            <span class="input-group-addon">
-                <span class="glyphicon glyphicon-time"></span>
-            </span>
-        </div>
-        <script type="text/javascript">
-            $('#clock_picker_input').clockpicker({
-                autoclose:true,
-                'default':'07:00',
-                donetext: 'Done',
-                afterDone: function() {
-                    //alert("after done");
-                }});
-        </script>
-        <form id="set_alarm_form">
-            <input id="set_alarm_button" type="button" value="Set alarm">
-            <input id="clear_alarm_button" type="button" value="Clear alarm">
-        </form>
-        <div>
-            <p id="server_response">SVAR FRÅN SERVERN</p>
+            <div id="main_header_div">
+                <h1 id="main_header">
+                    My <img id="header_img" src="../static/RPi-Logo-Reg-SCREEN.png">-Pi TV-Alarm
+                </h1>
+            </div>
+            <div id="clock_picker_input" class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+                <input id="clock-picker" type="text" class="form-control" value="07:00">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-time"></span>
+                </span>
+            </div>
+            <script type="text/javascript">
+                $('#clock_picker_input').clockpicker({
+                    autoclose:true,
+                    'default':'07:00',
+                    donetext: 'Done',
+                    afterDone: function() {
+                        //alert("after done");
+                    }});
+
+            </script>
+            <form id="set_alarm_form">
+                <input id="set_alarm_button" type="button" value="Set alarm">
+                <input id="clear_alarm_button" type="button" value="Clear alarm">
+            </form>
+            <div>
+                <p id="server_response">Current alarm: {{ current_alarm }}</p>
+            </div>
+            <div id="remote_control_container">
+            <div id="remote_control_others">
+                <table>
+                    <caption>Other buttons</caption>
+                    <tr>
+                        <th>
+                            <button id="pwr_btn" onclick="remoteControlSender('pwr_btn')">On/Off</button>
+                            <button id="mute_btn" onclick="remoteControlSender('mute_btn')">Mute</button>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <button id="source_btn" onclick="remoteControlSender('source_btn')">Source</button>
+                            <button id="tv_radio_btn" onclick="remoteControlSender('tv_radio_btn')">Tv/Radio</button>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <button id="volume_up_btn" onclick="remoteControlSender('volume_up_btn')">Volym++</button>
+                            <button id="channel_up_btn" onclick="remoteControlSender('channel_up_btn')">Channel++</button>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <button id="volume_down_btn" onclick="remoteControlSender('volume_down_btn')">Volyme--</button>
+                            <button id="channel_down_btn" onclick="remoteControlSender('channel_down_btn')">Channel--</button>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+            <div id="remote_control_channels">
+                <table>
+                    <caption>Channels</caption>
+                    <tr>
+                        <th>
+                            <button id="ch_1_btn" onclick="remoteControlSender('ch1_btn')">1</button>
+                            <button id="ch_2_btn" onclick="remoteControlSender('ch2_btn')">2</button>
+                            <button id="ch_3_btn" onclick="remoteControlSender('ch3_btn')">3</button>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <button id="ch_4_btn" onclick="remoteControlSender('ch4_btn')">4</button>
+                            <button id="ch_5_btn" onclick="remoteControlSender('ch5_btn')">5</button>
+                            <button id="ch_6_btn" onclick="remoteControlSender('ch6_btn')">6</button>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <button id="ch_7_btn" onclick="remoteControlSender('ch7_btn')">7</button>
+                            <button id="ch_8_btn" onclick="remoteControlSender('ch8_btn')">8</button>
+                            <button id="ch_9_btn" onclick="remoteControlSender('ch9_btn')">9</button>
+                        </th>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </body>

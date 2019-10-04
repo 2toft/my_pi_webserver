@@ -16,6 +16,16 @@ html{
     color: #000;
 }
 
+#remote_control_others{
+    float: left;
+    padding-right: 10%;
+}
+
+#remote_control_container{
+    padding-top: 10%;
+    padding-left: 10%;
+}
+
 #header_img{
     height: 60px;
     width: 55px;
